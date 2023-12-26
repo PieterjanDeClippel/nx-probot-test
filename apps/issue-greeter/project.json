@@ -1,0 +1,18 @@
+{
+  "name": "issue-greeter",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/issue-greeter/src",
+  "targets": {
+    "build": {
+      "command": "npx tsc -p apps/issue-greeter/tsconfig.json --outDir dist"
+    },
+    "serve": {
+      "command": "probot run ./dist/apps/issue-greeter/src/index.js",
+      "dependsOn": ["build"]
+    },
+    "test": {
+      "command": "jest"
+    }
+  }
+}

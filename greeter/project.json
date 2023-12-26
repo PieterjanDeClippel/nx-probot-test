@@ -1,0 +1,34 @@
+{
+  "name": "greeter",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "greeter/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/greeter",
+        "main": "greeter/src/index.ts",
+        "tsConfig": "greeter/tsconfig.lib.json",
+        "assets": ["greeter/*.md"]
+      }
+    },
+    "publish": {
+      "command": "node tools/scripts/publish.mjs greeter {args.ver} {args.tag}",
+      "dependsOn": ["build"]
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "greeter/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}
